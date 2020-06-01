@@ -29,12 +29,17 @@ app.post('/:id', function (req, res) {
 //websocket
 
 io.on('connection', client => {
+    client.on('connected', () => {
+        console.log(client.conn.remoteAddress);
+        console.log('connected')
+    });
+
     client.on('event', data => {
         console.log(data)
     });
 
     client.on('disconnect', () => {
-        console.log(client);
+        console.log(client.conn.remoteAddress);
         console.log('disconnected')
     });
 });
